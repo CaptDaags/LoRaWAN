@@ -1,0 +1,7 @@
+function Decoder(bytes, port) {
+
+return {
+    ASCII: String.fromCharCode.apply(null, bytes)
+};
+
+}
