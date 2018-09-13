@@ -8,4 +8,5 @@ If you blow shit up with what you find here then all the more fool ya are. I pro
 Current configuration that this covers:
 
 Gateway: Raspberry Pi 3B+ with RHF shield on AU 915 frequency plan.
+
 Node: Arduino Uno with Draguino Lora shield on AU 915 frequency plan.
