@@ -1,4 +1,4 @@
---SOF--
+
 
 INTRODUCTION
 ============ 
@@ -41,4 +41,4 @@ TTN Configuration - Gateway 1
 TTN Configuration - Node 1
 --------------------------
 
---EOF--
+
