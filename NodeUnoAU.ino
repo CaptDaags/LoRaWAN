@@ -11,6 +11,9 @@
 //                            this has yet to be actually uploaded and tested so may be bollocks.
 //                            Source of this wisdom: https://github.com/things4u/LoRa-LMIC-1.51/issues/13
 //                            As you can see, like keeping orginal stuff in REM's in case I fuck it up.
+//            Darrin Pearce - Now operational, had to put back the PROGMEM stuff in the setup and also list out
+//                            the AU freq's to make sure we are TX'ing on the same as the gateway is listening.
+//                            The freq data was from the global in /opt/ttngateway/bin on the gateway Pi.
 
 #include <lmic.h>
 #include <hal/hal.h>
@@ -24,9 +27,9 @@
 // static const u1_t NWKSKEY[16] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 // static const u1_t APPSKEY[16] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 // static const u4_t DEVADDR = 0x00000000;
-static const u1_t NWKSKEY[16] = ADD YOUR KEYS;
-static const u1_t APPSKEY[16] = ADD YOUR KEYS;
-static const u4_t DEVADDR = 0xADD YOUR KEYS;
+static const u1_t NWKSKEY[16] = {0xCB, 0x06, 0x21, 0xD9, 0xD8, 0x93, 0x93, 0x9D, 0x45, 0x2A, 0x00, 0x91, 0xCC, 0x3E, 0xAD, 0x57};
+static const u1_t APPSKEY[16] = {0x4A, 0x2B, 0x91, 0x42, 0xA9, 0xD9, 0xEB, 0x7B, 0x53, 0x6F, 0xE0, 0x0D, 0x5B, 0xE1, 0x1F, 0x3A};
+static const u4_t DEVADDR = 0x260418D5;
 //#endif
 
 // These callbacks are only used in over-the-air activation, so they are
@@ -40,7 +43,7 @@ static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 20;
+const unsigned TX_INTERVAL = 300;
 
 // Pin mapping Dragino Shield
 const lmic_pinmap lmic_pins = {
@@ -59,6 +62,7 @@ void onEvent (ev_t ev) {
 
 void do_send(osjob_t* j){
     // Payload to send (uplink)
+    Serial.println(F("Entering SEND..."));
     static uint8_t message[] = "hi";
 
     // Check if there is not a current TX/RX job running
@@ -84,7 +88,34 @@ void setup() {
 
     // Set static session parameters.
     // LMIC_setSession (0x1, DEVADDR, NWKSKEY, APPSKEY);
-    LMIC_setSession (0x1, DEVADDR, (uint8_t*)NWKSKEY, (uint8_t*)APPSKEY);
+    // LMIC_setSession (0x1, DEVADDR, (uint8_t*)NWKSKEY, (uint8_t*)APPSKEY);
+
+     // Set static session parameters. Instead of dynamically establishing a session
+    // by joining the network, precomputed session parameters are be provided.
+    #ifdef PROGMEM
+    // On AVR, these values are stored in flash and only copied to RAM
+    // once. Copy them to a temporary buffer here, LMIC_setSession will
+    // copy them into a buffer of its own again.
+    uint8_t appskey[sizeof(APPSKEY)];
+    uint8_t nwkskey[sizeof(NWKSKEY)];
+    memcpy_P(appskey, APPSKEY, sizeof(APPSKEY));
+    memcpy_P(nwkskey, NWKSKEY, sizeof(NWKSKEY));
+    LMIC_setSession (0x1, DEVADDR, nwkskey, appskey);
+    #else
+    // If not running an AVR with PROGMEM, just use the arrays directly 
+    LMIC_setSession (0x1, DEVADDR, NWKSKEY, APPSKEY);
+    #endif
+
+    LMIC_setupChannel(0, 916800000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      //
+    LMIC_setupChannel(1, 917000000, DR_RANGE_MAP(DR_SF12, DR_SF7B), BAND_CENTI);      //
+    LMIC_setupChannel(2, 917200000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      //
+    LMIC_setupChannel(3, 917400000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      //
+    LMIC_setupChannel(4, 917600000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      //
+    LMIC_setupChannel(5, 917800000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      //
+    LMIC_setupChannel(6, 918000000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      //
+    LMIC_setupChannel(7, 918200000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      //
+    // LMIC_setupChannel(8, 917500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_MILLI);      // 
+
 
     // Disable link check validation
     LMIC_setLinkCheckMode(0);
