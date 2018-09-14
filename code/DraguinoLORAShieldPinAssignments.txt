@@ -1,0 +1,13 @@
+--SOF--
+These are the pin assignments used in the node code. These appear to be specific to each hardware so if
+you change the shield to a different chip/manufacturer etc they will have there own pin assignments.
+
+// Pin mapping Dragino Shield
+const lmic_pinmap lmic_pins = {
+    .nss = 10,
+    .rxtx = LMIC_UNUSED_PIN,
+    .rst = 9,
+    .dio = {2, 6, 7},
+};
+
+--EOF--
