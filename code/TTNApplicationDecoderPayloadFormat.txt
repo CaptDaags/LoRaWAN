@@ -1,3 +1,12 @@
+
+
+The function shown below and not including the dotted line is configured in the TTN
+Application Decoder Payload Format section. It basically takes the payload from the 
+sensor node attached to the TTN Application and converts it to a ASCII string for
+the carbon based interface to be able to read.
+
+----------------
+
 function Decoder(bytes, port) {
 
 return {
