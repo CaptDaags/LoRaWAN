@@ -5,6 +5,8 @@ Generally this is for my use but feel free to look around and use what you can a
 
 If you blow shit up with what you find here then all the more fool ya are. I profess no expertise here so use at your own peril.
 
+Added Fritzing to the repo as well.
+
 Current configuration that this covers:
 
 Gateway: Raspberry Pi 3B+ with RHF shield on AU 915 frequency plan.
