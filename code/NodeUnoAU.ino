@@ -60,7 +60,7 @@ static osjob_t sendjob;
 // cycle limitations).
 const unsigned TX_INTERVAL = 60;
 
-// Pin mapping Dragino Shield
+// Pin mapping Dragino Shield. Change for different hardware config
 const lmic_pinmap lmic_pins = {
     .nss = 10,
     .rxtx = LMIC_UNUSED_PIN,
