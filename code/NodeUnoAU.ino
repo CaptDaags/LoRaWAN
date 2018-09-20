@@ -29,8 +29,8 @@
  *
  * The body of this code was created by Matthijs Kooijman with
  * adaptions by Andreas Spiess. Thanks guys.
- * I added some of my own stuff for AU 915 freq plan and other stuff
- * as noted.
+ * I added some of my own stuff for AU 915 freq plan from info on 
+ * the TheThingsNetwork web site and other stuff as noted.
  *
  *******************************************************************************/
  // =====================================================
