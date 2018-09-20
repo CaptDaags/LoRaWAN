@@ -2,6 +2,8 @@
 These are the pin assignments used in the node code. These appear to be specific to each hardware so if
 you change the shield to a different chip/manufacturer etc they will have there own pin assignments.
 
+This was from the original work of Andreas Spiess who worked this out.
+
 // Pin mapping Dragino Shield
 const lmic_pinmap lmic_pins = {
     .nss = 10,
