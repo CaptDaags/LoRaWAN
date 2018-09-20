@@ -27,11 +27,17 @@
  *
  * Do not forget to define the radio type correctly in config.h.
  *
+ * The body of this code was created by Matthijs Kooijman with
+ * adaptions by Andreas Spiess. Thanks guys.
+ * I added some of my own stuff for AU 915 freq plan and other stuff
+ * as noted.
+ *
  *******************************************************************************/
  // =====================================================
  // REMEMBER TO RESET FRAME COUNTERS WHEN LOAD NEW SKETCH
  // 4.3 Added code to turn on LED as its enter TX cycle
  // and cleaned up REM'ed out stuff
+ // 4.4 Added attribution note above to original authors
  // =====================================================
 
 #include <lmic.h>
