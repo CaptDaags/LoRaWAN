@@ -36,8 +36,8 @@
  // =====================================================
  // REMEMBER TO RESET FRAME COUNTERS WHEN LOAD NEW SKETCH
  // 4.3 Added code to turn on LED as its enter TX cycle
- // and cleaned up REM'ed out stuff
- // 4.4 Added attribution note above to original authors
+ // and cleaned up REM'ed out stuff.
+ // Added attribution note above to original authors
  // =====================================================
 
 #include <lmic.h>
