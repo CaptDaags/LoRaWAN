@@ -112,13 +112,23 @@ void onEvent (ev_t ev) {
             break;
         case EV_TXCOMPLETE:
             Serial.println(F("EV_TXCOMPLETE (includes waiting for RX windows)"));
-            if (LMIC.txrxFlags & TXRX_ACK)
-              Serial.println(F("Received ack"));
-            if (LMIC.dataLen) {
-              Serial.println(F("Received "));
-              Serial.println(LMIC.dataLen);
-              Serial.println(F(" bytes of payload"));
-            }
+            Serial.println(LMIC.dataLen);
+           if (LMIC.dataLen) {
+                // data received in rx slot after tx
+                uint8_t downlink[LMIC.dataLen];
+                memcpy(&downlink, &(LMIC.frame + LMIC.dataBeg)[0], LMIC.dataLen);
+                // Turn on/off fan if we get the magic number
+                    if ( downlink[0] == 0x31 ) {
+                    Serial.println(F("Write code RX in uplink"));
+                    }
+                    else {
+                    Serial.println(F("No or wrong code RX in uplink"));
+                    }
+
+           Serial.print(F("Data Received: "));
+           Serial.write(LMIC.frame + LMIC.dataBeg, LMIC.dataLen);
+           Serial.println();
+           }
             // Schedule next transmission
             os_setTimedCallback(&sendjob, os_getTime()+sec2osticks(TX_INTERVAL), do_send);
             digitalWrite(MYLED, LOW);
