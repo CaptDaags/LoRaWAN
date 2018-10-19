@@ -1,0 +1,13 @@
+----------------------------------------------------------------------------------------
+
+This is a quick brain dump for inclusion later and this file will ultimately be deleted.
+
+----------------------------------------------------------------------------------------
+
+Example from Sensolot:
+
+ Serial.println(F("Received "));
+ Serial.println(LMIC.dataLen);
+ Serial.println(F(" bytes of payload"));
+ 
+ ---EOF---
