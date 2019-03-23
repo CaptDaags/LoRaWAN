@@ -12,3 +12,9 @@ Current configuration that this covers:
 Gateway: Raspberry Pi 3B+ with RHF shield on AU 915 frequency plan.
 
 Node: Arduino Uno with Draguino Lora shield on AU 915 frequency plan.
+
+Libraries: Some things to watch for. The traditional IBM LMIC libraries tend to be a little fat for the Arduino
+Uno. They are good for most things and most of the code here needs this particular library unless indicated.
+However, for the temp sensor to TTN sketch which is being worked on at the moment needs the slimmed down LMIC
+library from the TTN gurus to fit in the Uno program memory space. But I am finding some issues with this
+library at the moment when using with the 915Mhz AU radios. Stay tuned.
