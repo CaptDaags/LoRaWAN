@@ -43,6 +43,9 @@
  // 4.5 Added code to write to serial console when a
  // predetermined code is received inbound.
  // =====================================================
+ // =====================================================
+ //   == This Sketch Uses The IBM LMIC Library Only ==
+ // =====================================================
 
 #include <lmic.h>
 #include <hal/hal.h>
