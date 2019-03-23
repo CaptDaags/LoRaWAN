@@ -18,3 +18,15 @@ Uno. They are good for most things and most of the code here needs this particul
 However, for the temp sensor to TTN sketch which is being worked on at the moment needs the slimmed down LMIC
 library from the TTN gurus to fit in the Uno program memory space. But I am finding some issues with this
 library at the moment when using with the 915Mhz AU radios. Stay tuned.
+
+Pin Mapping - Shields: Also to save some brain cells dont forget to apply the pin mapping for your
+particular shields. For instance my Dragino uses:
+           // Pin mapping Dragino Shield
+              const lmic_pinmap lmic_pins = {
+              .nss = 10,
+              .rxtx = LMIC_UNUSED_PIN,
+              .rst = 9,
+              .dio = {2, 6, 7},
+              };
+
+---
